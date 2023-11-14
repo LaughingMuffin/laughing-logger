@@ -44,6 +44,7 @@ public class SaveLogHelper {
     private static final String CATLOG_DIR = "matlog";
     private static final String SAVED_LOGS_DIR = "saved_logs";
     private static final String TMP_DIR = "tmp";
+    public static final String DOCUMENTS = "/Documents";
 
     private static UtilLogger log = new UtilLogger(SaveLogHelper.class);
 
@@ -274,7 +275,7 @@ public class SaveLogHelper {
 
         File sdcardDir = Environment.getExternalStorageDirectory();
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R)
-            sdcardDir = new File("/sdcard/Documents");
+            sdcardDir = new File(Environment.getExternalStorageDirectory().getPath().concat(DOCUMENTS));
 
         File catlogDir = new File(sdcardDir, CATLOG_DIR);
 

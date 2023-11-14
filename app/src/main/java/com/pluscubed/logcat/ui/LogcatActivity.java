@@ -1,5 +1,8 @@
 package com.pluscubed.logcat.ui;
 
+import static com.pluscubed.logcat.data.LogLineViewHolder.CONTEXT_MENU_COPY_ID;
+import static com.pluscubed.logcat.data.LogLineViewHolder.CONTEXT_MENU_FILTER_ID;
+
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.ClipData;
@@ -11,7 +14,9 @@ import android.content.pm.PackageManager;
 import android.database.MatrixCursor;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
 import android.os.Looper;
 import android.provider.BaseColumns;
@@ -95,9 +100,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Set;
-
-import static com.pluscubed.logcat.data.LogLineViewHolder.CONTEXT_MENU_COPY_ID;
-import static com.pluscubed.logcat.data.LogLineViewHolder.CONTEXT_MENU_FILTER_ID;
 
 import me.zhanghai.android.fastscroll.FastScrollerBuilder;
 
@@ -225,7 +227,7 @@ public class LogcatActivity extends BaseActivity implements FilterListener, LogL
         FastScrollerBuilder fastScrollerBuilder = new FastScrollerBuilder(list);
         fastScrollerBuilder.disableScrollbarAutoHide();
         fastScrollerBuilder.build();
-        
+
         searchView = findViewById(R.id.search_bar);
         mFab = findViewById(R.id.fab);
         mAppBar = findViewById(R.id.bottom_appbar);
@@ -260,12 +262,18 @@ public class LogcatActivity extends BaseActivity implements FilterListener, LogL
 
         switch (action) {
             case "record":
-                if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                        != PackageManager.PERMISSION_GRANTED) {
-                    ActivityCompat.requestPermissions(this,
-                            new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
-                            SHOW_RECORD_LOG_REQUEST_SHORTCUT);
-                    return;
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+                    if (!Environment.isExternalStorageManager()) {
+                        return;
+                    }
+                } else {
+                    if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                            != PackageManager.PERMISSION_GRANTED) {
+                        ActivityCompat.requestPermissions(this,
+                                new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                                SHOW_RECORD_LOG_REQUEST_SHORTCUT);
+                        return;
+                    }
                 }
 
                 String logFilename = DialogHelper.createLogFilename();
@@ -521,11 +529,11 @@ public class LogcatActivity extends BaseActivity implements FilterListener, LogL
      * It is the same method as of onPrepareOptionsMenu(Menu), but with different JVM signature
      * Since we are replaced {@link androidx.appcompat.widget.Toolbar} with {@link BottomAppBar}/
      * we need to manually manage options menu items visibility. BottomAppBar does not support
-     * @see androidx.appcompat.app.AppCompatActivity#setSupportActionBar(Toolbar)
      *
      * @param menu BottomAppBar menu
-     *
-     * see this method usages to understand
+     *             <p>
+     *             see this method usages to understand
+     * @see androidx.appcompat.app.AppCompatActivity#setSupportActionBar(Toolbar)
      */
     public boolean flexOptionsMenu(Menu menu) {
         invalidateDarkOrLightMenuItems(this, menu);
@@ -715,26 +723,33 @@ public class LogcatActivity extends BaseActivity implements FilterListener, LogL
             setSearchText(SearchCriteria.TAG_KEYWORD + tagQuery);
             dialog.dismiss();
             //TODO: put the cursor at the end
-                            /*searchEditText.setSelection(searchEditText.length());*/
+            /*searchEditText.setSelection(searchEditText.length());*/
         });
 
         pid.setOnClickListener(v -> {
             setSearchText(SearchCriteria.PID_KEYWORD + logLine.getProcessId());
             dialog.dismiss();
             //TODO: put the cursor at the end
-                            /*searchEditText.setSelection(searchEditText.length());*/
+            /*searchEditText.setSelection(searchEditText.length());*/
         });
     }
 
     private void showRecordLogDialog() {
 
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this,
-                    new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
-                    SHOW_RECORD_LOG_REQUEST);
-            return;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            if (!Environment.isExternalStorageManager()) {
+                return;
+            }
+        } else {
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                    != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(this,
+                        new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                        SHOW_RECORD_LOG_REQUEST_SHORTCUT);
+                return;
+            }
         }
+
         // start up the dialog-like activity
         String[] suggestions = ArrayUtil.toArray(new ArrayList<>(mSearchSuggestionsSet), String.class);
 
@@ -794,8 +809,7 @@ public class LogcatActivity extends BaseActivity implements FilterListener, LogL
 
         // show a popup to add a new filter text
         LayoutInflater inflater = getLayoutInflater();
-        @SuppressLint("InflateParams")
-        final AutoCompleteTextView editText =
+        @SuppressLint("InflateParams") final AutoCompleteTextView editText =
                 (AutoCompleteTextView) inflater.inflate(R.layout.dialog_new_filter, null, false);
 
         // show suggestions as the user types
@@ -940,13 +954,20 @@ public class LogcatActivity extends BaseActivity implements FilterListener, LogL
 
     private void startDeleteSavedLogsDialog() {
 
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this,
-                    new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
-                    DELETE_SAVED_LOG_REQUEST);
-            return;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            if (!Environment.isExternalStorageManager()) {
+                return;
+            }
+        } else {
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                    != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(this,
+                        new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                        SHOW_RECORD_LOG_REQUEST_SHORTCUT);
+                return;
+            }
         }
+
         if (!SaveLogHelper.checkSdCard(this)) {
             return;
         }
@@ -1034,12 +1055,18 @@ public class LogcatActivity extends BaseActivity implements FilterListener, LogL
 
     private void showSendLogDialog() {
 
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this,
-                    new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
-                    SEND_LOG_ID_REQUEST);
-            return;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            if (!Environment.isExternalStorageManager()) {
+                return;
+            }
+        } else {
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                    != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(this,
+                        new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                        SHOW_RECORD_LOG_REQUEST_SHORTCUT);
+                return;
+            }
         }
 
         LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -1069,12 +1096,18 @@ public class LogcatActivity extends BaseActivity implements FilterListener, LogL
 
     private void showSaveLogZipDialog() {
 
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this,
-                    new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
-                    SEND_LOG_ID_REQUEST);
-            return;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            if (!Environment.isExternalStorageManager()) {
+                return;
+            }
+        } else {
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                    != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(this,
+                        new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                        SHOW_RECORD_LOG_REQUEST_SHORTCUT);
+                return;
+            }
         }
 
         LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -1141,6 +1174,7 @@ public class LogcatActivity extends BaseActivity implements FilterListener, LogL
         }).start();
 
     }
+
     protected void saveLogToTargetApp(final boolean includeDeviceInfo, final boolean includeDmesg) {
 
         if (!SaveLogHelper.checkSdCard(this)) {
@@ -1297,12 +1331,18 @@ public class LogcatActivity extends BaseActivity implements FilterListener, LogL
     }
 
     private void showSaveLogDialog() {
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this,
-                    new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
-                    SAVE_LOG_REQUEST);
-            return;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            if (!Environment.isExternalStorageManager()) {
+                return;
+            }
+        } else {
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                    != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(this,
+                        new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                        SHOW_RECORD_LOG_REQUEST_SHORTCUT);
+                return;
+            }
         }
 
         if (!SaveLogHelper.checkSdCard(this)) {
@@ -1388,12 +1428,18 @@ public class LogcatActivity extends BaseActivity implements FilterListener, LogL
 
     private void showOpenLogFileDialog() {
 
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this,
-                    new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
-                    OPEN_LOG_REQUEST);
-            return;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            if (!Environment.isExternalStorageManager()) {
+                return;
+            }
+        } else {
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                    != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(this,
+                        new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                        SHOW_RECORD_LOG_REQUEST_SHORTCUT);
+                return;
+            }
         }
         if (!SaveLogHelper.checkSdCard(this)) {
             return;
@@ -1537,7 +1583,7 @@ public class LogcatActivity extends BaseActivity implements FilterListener, LogL
 //            snackbar.show();
 //        }
 
-        if (logFileMode){
+        if (logFileMode) {
             Toast.makeText(this, mCurrentlyOpenLog, Toast.LENGTH_SHORT).show();
         }
         searchView.setQueryHint(logFileMode ? mCurrentlyOpenLog : getString(R.string.search_hint));
@@ -1612,13 +1658,20 @@ public class LogcatActivity extends BaseActivity implements FilterListener, LogL
 
     private void completePartialSelect() {
 
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this,
-                    new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
-                    COMPLETE_PARTIAL_SELECT_REQUEST);
-            return;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            if (!Environment.isExternalStorageManager()) {
+                return;
+            }
+        } else {
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                    != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(this,
+                        new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                        SHOW_RECORD_LOG_REQUEST_SHORTCUT);
+                return;
+            }
         }
+
         if (!SaveLogHelper.checkSdCard(this)) {
             cancelPartialSelect();
             return;
@@ -1637,7 +1690,7 @@ public class LogcatActivity extends BaseActivity implements FilterListener, LogL
 
 
         MaterialDialog.SingleButtonCallback onCancelListener = (dialog, which) -> {
-            if(which == DialogAction.NEGATIVE) {
+            if (which == DialogAction.NEGATIVE) {
                 cancelPartialSelect();
             }
         };
@@ -1917,7 +1970,7 @@ public class LogcatActivity extends BaseActivity implements FilterListener, LogL
 
     }
 
-    private void initSearchView(){
+    private void initSearchView() {
         //used to workaround issue where the search text is cleared on expanding the SearchView
         searchView.setSuggestionsAdapter(mSearchSuggestionsAdapter);
         searchView.setOnSuggestionListener(new SearchView.OnSuggestionListener() {

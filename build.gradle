@@ -3,10 +3,11 @@ apply plugin: 'com.github.ben-manes.versions'
 buildscript {
     repositories {
         google()
+        mavenCentral()
         jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:7.2.1'
+        classpath 'com.android.tools.build:gradle:7.2.2'
         classpath 'com.google.gms:google-services:4.3.10'
         classpath 'com.github.ben-manes:gradle-versions-plugin:0.20.0'
     }
@@ -15,6 +16,7 @@ buildscript {
 allprojects {
     repositories {
         google()
+        mavenCentral()
         jcenter()
         maven { url 'https://jitpack.io' }
     }
