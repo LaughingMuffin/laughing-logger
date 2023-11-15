@@ -11,7 +11,7 @@ android {
         applicationId "com.pluscubed.matlog"
         minSdkVersion 21
         targetSdkVersion 34
-        versionName '2.0.0-3'
+        versionName '2.1.0-5'
         versionCode 13
 
         testApplicationId "com.pluscubed.matlog.test"

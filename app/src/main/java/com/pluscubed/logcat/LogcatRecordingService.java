@@ -8,6 +8,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.pm.ServiceInfo;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Handler;
@@ -76,7 +77,11 @@ public class LogcatRecordingService extends IntentService {
         IntentFilter intentFilter = new IntentFilter(ACTION_STOP_RECORDING);
         intentFilter.addDataScheme(URI_SCHEME);
 
-        registerReceiver(receiver, intentFilter);
+        try {
+            registerReceiver(receiver, intentFilter);
+        } catch (SecurityException securityException) {
+            registerReceiver(receiver, intentFilter, RECEIVER_EXPORTED);
+        }
 
         handler = new Handler(Looper.getMainLooper());
     }
@@ -139,7 +144,7 @@ public class LogcatRecordingService extends IntentService {
                 Long.toHexString(new Random().nextLong())));
 
         PendingIntent pendingIntent = PendingIntent.getBroadcast(this,
-                0 /* no requestCode */, stopRecordingIntent, PendingIntent.FLAG_ONE_SHOT);
+                0 /* no requestCode */, stopRecordingIntent, PendingIntent.FLAG_ONE_SHOT | PendingIntent.FLAG_IMMUTABLE);
 
         final String CHANNEL_ID = "matlog_logging_channel";
         // Set the icon, scrolling text and timestamp
@@ -160,7 +165,11 @@ public class LogcatRecordingService extends IntentService {
             manager.createNotificationChannel(channel);
         }
 
-        startForeground(R.string.notification_title, notification.build());
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            startForeground(R.string.notification_title, notification.build(), ServiceInfo.FOREGROUND_SERVICE_TYPE_SPECIAL_USE);
+        } else {
+            startForeground(R.string.notification_title, notification.build());
+        }
     }
 
     protected void onHandleIntent(Intent intent) {

@@ -16,6 +16,8 @@
         android:name="android.permission.MANAGE_EXTERNAL_STORAGE"
         tools:ignore="ScopedStorage" />
 
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_SPECIAL_USE" />
+
     <application
         android:name=".App"
         android:allowBackup="true"
@@ -60,9 +62,15 @@
 
         <activity android:name="com.pluscubed.logcat.ui.SettingsActivity" />
 
-        <service android:name="com.pluscubed.logcat.LogcatRecordingService" android:exported="false" />
+        <service
+            android:name="com.pluscubed.logcat.LogcatRecordingService"
+            android:exported="false"
+            android:foregroundServiceType="specialUse" />
 
-        <service android:name="com.pluscubed.logcat.CrazyLoggerService" android:exported="false" />
+        <service
+            android:name="com.pluscubed.logcat.CrazyLoggerService"
+            android:exported="false"
+            android:foregroundServiceType="specialUse" />
 
         <receiver
             android:name="com.pluscubed.logcat.RecordingWidgetProvider"
