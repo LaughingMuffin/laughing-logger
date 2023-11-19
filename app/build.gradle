@@ -16,6 +16,8 @@ android {
         versionName '3.0.0'
         versionCode 300
 
+        multiDexEnabled true
+
         testApplicationId "org.laughing.logger.test"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
@@ -41,9 +43,9 @@ android {
 
     buildTypes {
         release {
-            minifyEnabled false
-            shrinkResources false
-            //proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            minifyEnabled true
+            shrinkResources true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             if (project.hasProperty("RELEASE_STORE_FILE")) {
                 signingConfig signingConfigs.release
             } else {
