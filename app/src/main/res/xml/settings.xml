@@ -34,14 +34,14 @@
             android:persistent="true"
             android:title="@string/pref_text_size_title" />
 
-        <com.pluscubed.logcat.widget.SweetSwitchPreference
+        <org.laughing.logger.widget.SweetSwitchPreference
             android:defaultValue="false"
             android:key="@string/pref_expanded_by_default"
             android:persistent="true"
             android:summary="@string/pref_expanded_by_default_summary"
             android:title="@string/pref_expanded_by_default_title" />
 
-        <com.pluscubed.logcat.widget.SweetSwitchPreference
+        <org.laughing.logger.widget.SweetSwitchPreference
             android:defaultValue="true"
             android:key="@string/pref_show_timestamp"
             android:persistent="true"
@@ -54,7 +54,7 @@
         android:layout="@layout/pref_category_custom">
 
         <!-- TODO: Switch to MultiSelectListPreference-->
-        <com.pluscubed.logcat.widget.MultipleChoicePreference
+        <org.laughing.logger.widget.MultipleChoicePreference
             android:defaultValue="@string/pref_buffer_choice_main_value"
             android:entries="@array/pref_buffer_choices"
             android:entryValues="@array/pref_buffer_choice_values"
@@ -75,14 +75,14 @@
     <PreferenceCategory android:title="@string/pref_cat_advanced"
         android:layout="@layout/pref_category_custom">
 
-        <com.pluscubed.logcat.widget.NonnegativeIntegerEditTextPreference
+        <org.laughing.logger.widget.NonnegativeIntegerEditTextPreference
             android:defaultValue="@string/pref_log_line_period_default"
             android:key="@string/pref_log_line_period"
             android:persistent="true"
             android:summary="@string/pref_log_line_period_summary"
             android:title="@string/pref_log_line_period_title" />
 
-        <com.pluscubed.logcat.widget.NonnegativeIntegerEditTextPreference
+        <org.laughing.logger.widget.NonnegativeIntegerEditTextPreference
             android:defaultValue="@string/pref_display_limit_default"
             android:key="@string/pref_display_limit"
             android:persistent="true"
@@ -96,7 +96,7 @@
             android:summary="@string/pref_filter_pattern_summary"
             android:title="@string/pref_filter_pattern_title" />
 
-        <com.pluscubed.logcat.widget.SweetSwitchPreference
+        <org.laughing.logger.widget.SweetSwitchPreference
             android:key="scrubber"
             android:title="@string/scrubber"
             android:summary="@string/scrubber_summary"
@@ -109,7 +109,7 @@
 
         <Preference
             android:key="@string/pref_about"
-            android:title="@string/about_matlog" />
+            android:title="@string/about_laughinglogger" />
 
     </PreferenceCategory>
 

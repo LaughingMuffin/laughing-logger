@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.pluscubed.logcat">
+    package="org.laughing.logger">
 
     <uses-permission
         android:name="android.permission.READ_LOGS"
@@ -19,18 +19,17 @@
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE_SPECIAL_USE" />
 
     <application
-        android:name=".App"
+        android:name="org.laughing.logger.App"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="${appName}"
         android:requestLegacyExternalStorage="true"
-        android:roundIcon="@mipmap/ic_launcher_round"
-        android:theme="@style/Theme.MatLog"
+        android:theme="@style/Theme.LaughingLogger"
         tools:ignore="GoogleAppIndexingWarning">
 
         <!--TODO: REMOVE THIS CONFIGCHANGES ATROCITY-->
         <activity
-            android:name="com.pluscubed.logcat.ui.LogcatActivity"
+            android:name="org.laughing.logger.ui.LogcatActivity"
             android:configChanges="screenSize|orientation"
             android:exported="true"
             android:launchMode="singleTop"
@@ -41,7 +40,7 @@
             </intent-filter>
 
             <intent-filter>
-                <action android:name="com.pluscubed.logcat.intents.LAUNCH" />
+                <action android:name="org.laughing.logger.intents.LAUNCH" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
 
@@ -51,29 +50,29 @@
         </activity>
 
         <activity
-            android:name="com.pluscubed.logcat.ui.AboutDialogActivity"
-            android:theme="@style/Theme.MatLog.AlertDialog" />
+            android:name="org.laughing.logger.ui.AboutDialogActivity"
+            android:theme="@style/Theme.LaughingLogger.AlertDialog" />
 
 
         <activity
-            android:name="com.pluscubed.logcat.ui.RecordLogDialogActivity"
-            android:theme="@style/Theme.MatLog.AlertDialog" />
+            android:name="org.laughing.logger.ui.RecordLogDialogActivity"
+            android:theme="@style/Theme.LaughingLogger.AlertDialog" />
 
 
-        <activity android:name="com.pluscubed.logcat.ui.SettingsActivity" />
+        <activity android:name="org.laughing.logger.ui.SettingsActivity" />
 
         <service
-            android:name="com.pluscubed.logcat.LogcatRecordingService"
+            android:name="org.laughing.logger.LogcatRecordingService"
             android:exported="false"
             android:foregroundServiceType="specialUse" />
 
         <service
-            android:name="com.pluscubed.logcat.CrazyLoggerService"
+            android:name="org.laughing.logger.CrazyLoggerService"
             android:exported="false"
             android:foregroundServiceType="specialUse" />
 
         <receiver
-            android:name="com.pluscubed.logcat.RecordingWidgetProvider"
+            android:name="org.laughing.logger.RecordingWidgetProvider"
             android:exported="true">
 
             <intent-filter>

@@ -2,7 +2,7 @@
 <resources>
     <!-- translateable strings-->
     <string name="about">Про додаток</string>
-    <string name="about_matlog">Про додаток MatLog</string>
+    <string name="about_laughinglogger">Про додаток Laughing Logger</string>
 
     <string name="add_filter">Додати фільтр</string>
     <string name="add_filter_ellipsis">Додати фільтр…</string>
@@ -29,7 +29,7 @@
     <string name="delete_saved_log">Видалити збережені логи</string>
     <string name="delimiter">, </string>
     <string name="dialog_compiling_log">Компіляція логу…</string>
-    <string name="dialog_for_donate">Як до <b>кольорових\nсхем</b>, завантажте\n<a href="market://details?id=com.pluscubed.logcat.donate">MatLog Donate</a></string>
+    <string name="dialog_for_donate">Як до <b>кольорових\nсхем</b>, завантажте\n<a href="market://details?id=org.laughing.logger.donate">Laughing Logger Donate</a></string>
     <string name="dialog_for_widget">Для <b>віджета</b>,\nна Головна → Довгий\nтап→ Віджети</string>
     <string name="dialog_initializing_recorder">Завантаження рекордера…</string>
     <string name="dialog_loading_updates">Завантаження оновлень…</string>
@@ -53,7 +53,7 @@
 
     <string name="first_run_pref_summary">Показувати навчальне повідомлення ще раз.</string>
     <string name="first_run_pref_title">Показувати повідомлення</string>
-    <string name="first_run_title">Раді вітати в MatLog!</string>
+    <string name="first_run_title">Раді вітати в Laughing Logger!</string>
 
     <string name="log_cleared">Логи очищені</string>
     <string name="log_level">Рівень логу</string>
@@ -156,9 +156,9 @@
         <item quantity="many">Лог дуже великий; відображається останні %d стрічок.</item>
     </plurals>
 
-    <string name="toast_no_root">Неможливо отримати root. Ви бачите тільки логи MatLog.</string>
-    <string name="toast_pref_changed_restart_required">Параметр змінено. Перезапустіть MatLog, щоб застосувати зміни.</string>
-    <string name="toast_request_root">MatLog потребує root (superuser) для читання логів.</string>
+    <string name="toast_no_root">Неможливо отримати root. Ви бачите тільки логи Laughing Logger.</string>
+    <string name="toast_pref_changed_restart_required">Параметр змінено. Перезапустіть Laughing Logger, щоб застосувати зміни.</string>
+    <string name="toast_request_root">Laughing Logger потребує root (superuser) для читання логів.</string>
     <string name="toast_started_select_partial">Частковий вибір активовано</string>
 
     <string name="unable_to_save_log">Помилка збереження. Ви ввели коректне ім\'я?</string>

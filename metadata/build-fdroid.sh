@@ -6,7 +6,7 @@
 
 set -ue
 
-appid="com.pluscubed.matloglibre"
+appid="org.laughing.loggerlibre"
 
 if [[ ! -d fdroidserver ]]; then
     echo "Cloning fdroidserver"

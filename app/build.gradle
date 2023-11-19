@@ -1,26 +1,25 @@
-apply plugin: 'com.android.application'
+plugins {
+    id 'com.android.application'
 
-repositories {
-    maven { url "https://jitpack.io" }
+    // Add the Google services Gradle plugin
+    id 'com.google.gms.google-services'
 }
 
 android {
+    namespace 'org.laughing.logger'
     compileSdk 34
 
     defaultConfig {
-        applicationId "com.pluscubed.matlog"
+        applicationId "org.laughing.logger"
         minSdkVersion 21
         targetSdkVersion 34
-        versionName '2.1.0-5'
-        versionCode 13
+        versionName '3.0.0'
+        versionCode 300
 
-        testApplicationId "com.pluscubed.matlog.test"
+        testApplicationId "org.laughing.logger.test"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
         manifestPlaceholders = [appName: "@string/app_name"]
-        if (project.hasProperty("RELEASE_STORE_FILE")) {
-            manifestPlaceholders.put("FABRIC_API_KEY", FABRIC_API_KEY)
-        }
 
         vectorDrawables.useSupportLibrary = true
     }
@@ -30,10 +29,14 @@ android {
             release {
                 storeFile file(RELEASE_STORE_FILE)
                 storePassword RELEASE_STORE_PASSWORD
-                keyAlias RELEASE_KEY_ALIAS_MATLOG
-                keyPassword RELEASE_KEY_PASSWORD_MATLOG
+                keyAlias RELEASE_KEY_ALIAS_LL
+                keyPassword RELEASE_KEY_PASSWORD_LL
             }
         }
+    }
+
+    buildFeatures {
+        buildConfig true
     }
 
     buildTypes {
@@ -50,7 +53,7 @@ android {
         debug {
             applicationIdSuffix '.debug'
             versionNameSuffix '-DEBUG'
-            manifestPlaceholders = [appName: "MatLog DEBUG"]
+            manifestPlaceholders = [appName: "Laughing Logger DEBUG"]
         }
     }
 
@@ -61,7 +64,7 @@ android {
         }
         fdroid {
             dimension "store"
-            applicationId "com.pluscubed.matloglibre"
+            applicationId "org.laughing.loggerlibre"
             manifestPlaceholders = [appName: "@string/app_name_libre"]
         }
     }
@@ -73,23 +76,24 @@ android {
 }
 
 dependencies {
+    // do not upgrade - fastscroll will not work
     implementation 'androidx.appcompat:appcompat:1.4.2'
-    implementation "androidx.recyclerview:recyclerview:1.2.1"
-    implementation 'androidx.annotation:annotation:1.4.0'
+    implementation "androidx.recyclerview:recyclerview:1.3.2"
+    implementation 'androidx.annotation:annotation:1.7.0'
+
+    // do not upgrade - fastscroll will not work
     implementation 'com.google.android.material:material:1.6.1'
     implementation 'me.zhanghai.android.fastscroll:library:1.1.7'
 
     implementation 'com.afollestad.material-dialogs:commons:0.9.6.0'
 
-    playImplementation 'com.google.firebase:firebase-core:21.1.1'
-    playImplementation('com.google.firebase:firebase-crashlytics:18.5.1')
+    playImplementation platform('com.google.firebase:firebase-bom:32.6.0')
+    playImplementation("com.google.firebase:firebase-crashlytics")
+    playImplementation("com.google.firebase:firebase-analytics")
 
-    androidTestImplementation('androidx.test.espresso:espresso-core:3.4.0', {
-        exclude group: 'com.android.support', module: 'support-annotations'
-    })
-    testImplementation 'junit:junit:4.13.2'
-
+    // do not upgrade (for now)
     implementation 'com.mikhaellopez:circularprogressbar:2.0.0'
 }
 
 apply plugin: 'com.google.gms.google-services'
+apply plugin: 'com.google.firebase.crashlytics'

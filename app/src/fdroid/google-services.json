@@ -8,7 +8,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:123456789012:android:1234567890123456",
         "android_client_info": {
-          "package_name": "com.pluscubed.matloglibre"
+          "package_name": "org.laughing.loggerlibre"
         }
       },
       "oauth_client": [
@@ -20,7 +20,7 @@
           "client_id": "",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.pluscubed.matloglibre",
+            "package_name": "org.laughing.loggerlibre",
             "certificate_hash": ""
           }
         }
@@ -50,7 +50,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:123456789012:android:1234567890123456",
         "android_client_info": {
-          "package_name": "com.pluscubed.matloglibre.debug"
+          "package_name": "org.laughing.loggerlibre.debug"
         }
       },
       "oauth_client": [
@@ -62,7 +62,7 @@
           "client_id": "",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.pluscubed.matloglibre.debug",
+            "package_name": "org.laughing.loggerlibre.debug",
             "certificate_hash": ""
           }
         }

@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="Theme.MatLog" parent="Base.Theme.MatLog">
+    <style name="Theme.LaughingLogger" parent="Base.Theme.LaughingLogger">
         <item name="android:windowContentOverlay">@null</item>
         <item name="toolbarShadow">@null</item>
     </style>
 
-    <style name="Theme.MatLog.Amoled" parent="Base.Theme.MatLog.Amoled">
+    <style name="Theme.LaughingLogger.Amoled" parent="Base.Theme.LaughingLogger.Amoled">
         <item name="android:windowContentOverlay">@null</item>
         <item name="toolbarShadow">@null</item>
     </style>
 
-    <style name="Theme.MatLog.Light" parent="Base.Theme.MatLog.Light">
+    <style name="Theme.LaughingLogger.Light" parent="Base.Theme.LaughingLogger.Light">
         <item name="android:windowContentOverlay">@null</item>
         <item name="toolbarShadow">@null</item>
     </style>

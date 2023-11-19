@@ -1,11 +1,11 @@
 <resources>
 
-    <style name="Theme.MatLog" parent="Base.Theme.MatLog">
+    <style name="Theme.LaughingLogger" parent="Base.Theme.LaughingLogger">
         <item name="android:windowContentOverlay">@null</item>
         <item name="toolbarShadow">@drawable/shadow</item>
     </style>
 
-    <style name="Base.Theme.MatLog" parent="@style/Theme.MaterialComponents.NoActionBar">
+    <style name="Base.Theme.LaughingLogger" parent="@style/Theme.MaterialComponents.NoActionBar">
         <item name="colorPrimary">@color/primary</item>
         <item name="colorPrimaryDark">@color/primary_dark</item>
         <item name="colorAccent">@color/accent</item>
@@ -24,12 +24,12 @@
         <item name="android:navigationBarColor">@android:color/transparent</item>
     </style>
 
-    <style name="Theme.MatLog.Amoled" parent="Base.Theme.MatLog">
+    <style name="Theme.LaughingLogger.Amoled" parent="Base.Theme.LaughingLogger">
         <item name="android:windowContentOverlay">@null</item>
         <item name="toolbarShadow">@drawable/shadow</item>
     </style>
 
-    <style name="Base.Theme.MatLog.Amoled" parent="@style/Theme.MaterialComponents.NoActionBar">
+    <style name="Base.Theme.LaughingLogger.Amoled" parent="@style/Theme.MaterialComponents.NoActionBar">
         <item name="colorPrimary">@color/primary_amoled</item>
         <item name="colorPrimaryDark">@color/primary_dark_amoled</item>
         <item name="colorAccent">@color/accent_amoled</item>
@@ -48,12 +48,12 @@
         <item name="android:navigationBarColor">@android:color/transparent</item>
     </style>
 
-    <style name="Theme.MatLog.Light" parent="Base.Theme.MatLog.Light">
+    <style name="Theme.LaughingLogger.Light" parent="Base.Theme.LaughingLogger.Light">
         <item name="android:windowContentOverlay">@null</item>
         <item name="toolbarShadow">@drawable/shadow</item>
     </style>
 
-    <style name="Base.Theme.MatLog.Light" parent="@style/Theme.MaterialComponents.Light.NoActionBar">
+    <style name="Base.Theme.LaughingLogger.Light" parent="@style/Theme.MaterialComponents.Light.NoActionBar">
         <item name="colorPrimary">@color/light_primary</item>
         <item name="colorPrimaryDark">@color/light_primary_dark</item>
         <item name="colorAccent">@color/light_accent</item>
@@ -68,7 +68,7 @@
         <item name="android:navigationBarColor">@android:color/transparent</item>
     </style>
 
-    <style name="Theme.MatLog.AlertDialog" parent="@style/Theme.MaterialComponents.Dialog.Alert">
+    <style name="Theme.LaughingLogger.AlertDialog" parent="@style/Theme.MaterialComponents.Dialog.Alert">
         <item name="colorPrimary">@color/primary</item>
         <item name="colorPrimaryDark">@color/primary_dark</item>
         <item name="colorAccent">@color/accent</item>

@@ -11,8 +11,8 @@
         android:shortcutShortLabel="@string/start_recording_log">
         <intent
             android:action="android.intent.action.MAIN"
-            android:targetClass="com.pluscubed.logcat.ui.LogcatActivity"
-            android:targetPackage="com.pluscubed.matlog">
+            android:targetClass="org.laughing.logger.ui.LogcatActivity"
+            android:targetPackage="org.laughing.logger">
 
             <extra
                 android:name="shortcut_action"
