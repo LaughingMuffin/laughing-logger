@@ -6,6 +6,8 @@ Graphical log reader for Android.
 Based on Daniel Ciao's Matlog [Google Play](https://play.google.com/store/apps/details?id=com.pluscubed.matlog), 
 [Github](https://github.com/pluscubed/matlog) <br> which is based on Nolan Lawson's CatLog: [Google Play][1], [GitHub][2]
 
+Soon on Google Play Store ...
+
 Overview
 ---------
 Laughing Logger is a free and open-source material-style log reader for Android based on CatLog.
