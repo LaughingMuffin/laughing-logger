@@ -3,10 +3,14 @@
 It's CatLog, but with material goodness.
 
 Graphical log reader for Android.
-Based on Daniel Ciao's Matlog [Google Play](https://play.google.com/store/apps/details?id=com.pluscubed.matlog), 
-[Github](https://github.com/pluscubed/matlog) <br> which is based on Nolan Lawson's CatLog: [Google Play][1], [GitHub][2]
+Based on Daniel Ciao's
+Matlog [Google Play](https://play.google.com/store/apps/details?id=com.pluscubed.matlog),
+[Github](https://github.com/pluscubed/matlog) <br> which is based on Nolan Lawson's
+CatLog: [Google Play][1], [GitHub][2]
 
-Soon on Google Play Store ...
+Soon on ...
+
+[<img src="https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png" alt="Get it on Google Play" height="90">](https://play.google.com/store/apps/details?id=org.laughing.logger)
 
 Overview
 ---------
