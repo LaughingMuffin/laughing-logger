@@ -1,9 +1,11 @@
 package org.laughing.logger.helper;
 
 import android.content.Context;
+import android.os.Build;
 import android.os.Environment;
 import android.widget.Toast;
 
+import org.laughing.logger.App;
 import org.laughing.logger.R;
 import org.laughing.logger.data.SavedLog;
 import org.laughing.logger.util.UtilLogger;
@@ -272,6 +274,10 @@ public class SaveLogHelper {
     private static File getCatlogDirectory() {
 
         File sdcardDir = Environment.getExternalStorageDirectory();
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            sdcardDir = App.get().getExternalMediaDirs()[0];
+        }
 
         File catlogDir = new File(sdcardDir, CATLOG_DIR);
 

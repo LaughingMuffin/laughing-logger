@@ -26,13 +26,17 @@ Taken from CatLog's FAQ:
 
 #### Why I can't save logs or start recording ?
 
-The applications might be missing "Storage" permission, until Android 12 included you will have this
-permission under "normal" ones from Android 13 onwards you will have to provide "All file access"
-permission which is a "Special" permission.
+The applications might be missing "Storage" permission if you are on an older Android version (Android 10 or less)
+and/or READ_LOGS permission has not been granted.
 
 #### Where are the logs saved?
 
-On the SD card, under ```/sdcard/Laughing Logger/saved_logs/```.
+On the internal storage, under ```/internal storage/Laughing Logger/saved_logs/``` if <= A10, <br>
+under ```/internal storage/Android/media/org.laughing.logger/Laughing Logger/saved_logs/``` if >= A11.
+
+#### How to I access saved logs ?
+
+A simple "file manager" application you can us is [Files by Google](https://play.google.com/store/apps/details?id=com.google.android.apps.nbu.files).
 
 #### I can't see any logs!
 
