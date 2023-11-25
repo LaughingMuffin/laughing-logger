@@ -13,7 +13,6 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment;
 import android.os.Handler;
 import android.os.Looper;
 import android.provider.BaseColumns;
@@ -58,6 +57,7 @@ import com.google.android.material.bottomappbar.BottomAppBar;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.mikhaellopez.circularprogressbar.CircularProgressBar;
+
 import org.laughing.logger.App;
 import org.laughing.logger.BuildConfig;
 import org.laughing.logger.LogcatRecordingService;
@@ -259,18 +259,12 @@ public class LogcatActivity extends BaseActivity implements FilterListener, LogL
 
         switch (action) {
             case "record":
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-                    if (!Environment.isExternalStorageManager()) {
-                        return;
-                    }
-                } else {
-                    if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                            != PackageManager.PERMISSION_GRANTED) {
-                        ActivityCompat.requestPermissions(this,
-                                new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
-                                SHOW_RECORD_LOG_REQUEST_SHORTCUT);
-                        return;
-                    }
+                if (Build.VERSION.SDK_INT < Build.VERSION_CODES.R && (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                        != PackageManager.PERMISSION_GRANTED)) {
+                    ActivityCompat.requestPermissions(this,
+                            new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                            SHOW_RECORD_LOG_REQUEST_SHORTCUT);
+                    return;
                 }
 
                 String logFilename = DialogHelper.createLogFilename();
@@ -733,18 +727,12 @@ public class LogcatActivity extends BaseActivity implements FilterListener, LogL
 
     private void showRecordLogDialog() {
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-            if (!Environment.isExternalStorageManager()) {
-                return;
-            }
-        } else {
-            if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                    != PackageManager.PERMISSION_GRANTED) {
-                ActivityCompat.requestPermissions(this,
-                        new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
-                        SHOW_RECORD_LOG_REQUEST_SHORTCUT);
-                return;
-            }
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.R && (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                != PackageManager.PERMISSION_GRANTED)) {
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                    SHOW_RECORD_LOG_REQUEST_SHORTCUT);
+            return;
         }
 
         // start up the dialog-like activity
@@ -951,18 +939,12 @@ public class LogcatActivity extends BaseActivity implements FilterListener, LogL
 
     private void startDeleteSavedLogsDialog() {
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-            if (!Environment.isExternalStorageManager()) {
-                return;
-            }
-        } else {
-            if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                    != PackageManager.PERMISSION_GRANTED) {
-                ActivityCompat.requestPermissions(this,
-                        new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
-                        SHOW_RECORD_LOG_REQUEST_SHORTCUT);
-                return;
-            }
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.R && (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                != PackageManager.PERMISSION_GRANTED)) {
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                    SHOW_RECORD_LOG_REQUEST_SHORTCUT);
+            return;
         }
 
         if (!SaveLogHelper.checkSdCard(this)) {
@@ -1052,18 +1034,12 @@ public class LogcatActivity extends BaseActivity implements FilterListener, LogL
 
     private void showSendLogDialog() {
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-            if (!Environment.isExternalStorageManager()) {
-                return;
-            }
-        } else {
-            if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                    != PackageManager.PERMISSION_GRANTED) {
-                ActivityCompat.requestPermissions(this,
-                        new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
-                        SHOW_RECORD_LOG_REQUEST_SHORTCUT);
-                return;
-            }
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.R && (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                != PackageManager.PERMISSION_GRANTED)) {
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                    SHOW_RECORD_LOG_REQUEST_SHORTCUT);
+            return;
         }
 
         LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -1093,18 +1069,12 @@ public class LogcatActivity extends BaseActivity implements FilterListener, LogL
 
     private void showSaveLogZipDialog() {
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-            if (!Environment.isExternalStorageManager()) {
-                return;
-            }
-        } else {
-            if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                    != PackageManager.PERMISSION_GRANTED) {
-                ActivityCompat.requestPermissions(this,
-                        new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
-                        SHOW_RECORD_LOG_REQUEST_SHORTCUT);
-                return;
-            }
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.R && (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                != PackageManager.PERMISSION_GRANTED)) {
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                    SHOW_RECORD_LOG_REQUEST_SHORTCUT);
+            return;
         }
 
         LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -1328,18 +1298,13 @@ public class LogcatActivity extends BaseActivity implements FilterListener, LogL
     }
 
     private void showSaveLogDialog() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-            if (!Environment.isExternalStorageManager()) {
-                return;
-            }
-        } else {
-            if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                    != PackageManager.PERMISSION_GRANTED) {
-                ActivityCompat.requestPermissions(this,
-                        new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
-                        SHOW_RECORD_LOG_REQUEST_SHORTCUT);
-                return;
-            }
+
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.R && (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                != PackageManager.PERMISSION_GRANTED)) {
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                    SHOW_RECORD_LOG_REQUEST_SHORTCUT);
+            return;
         }
 
         if (!SaveLogHelper.checkSdCard(this)) {
@@ -1425,19 +1390,14 @@ public class LogcatActivity extends BaseActivity implements FilterListener, LogL
 
     private void showOpenLogFileDialog() {
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-            if (!Environment.isExternalStorageManager()) {
-                return;
-            }
-        } else {
-            if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                    != PackageManager.PERMISSION_GRANTED) {
-                ActivityCompat.requestPermissions(this,
-                        new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
-                        SHOW_RECORD_LOG_REQUEST_SHORTCUT);
-                return;
-            }
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.R && (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                != PackageManager.PERMISSION_GRANTED)) {
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                    SHOW_RECORD_LOG_REQUEST_SHORTCUT);
+            return;
         }
+
         if (!SaveLogHelper.checkSdCard(this)) {
             return;
         }
@@ -1655,18 +1615,12 @@ public class LogcatActivity extends BaseActivity implements FilterListener, LogL
 
     private void completePartialSelect() {
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-            if (!Environment.isExternalStorageManager()) {
-                return;
-            }
-        } else {
-            if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                    != PackageManager.PERMISSION_GRANTED) {
-                ActivityCompat.requestPermissions(this,
-                        new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
-                        SHOW_RECORD_LOG_REQUEST_SHORTCUT);
-                return;
-            }
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.R && (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                != PackageManager.PERMISSION_GRANTED)) {
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                    SHOW_RECORD_LOG_REQUEST_SHORTCUT);
+            return;
         }
 
         if (!SaveLogHelper.checkSdCard(this)) {

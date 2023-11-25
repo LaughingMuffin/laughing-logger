@@ -11,11 +11,6 @@
         android:maxSdkVersion="32"
         tools:ignore="ScopedStorage" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
-
-    <uses-permission
-        android:name="android.permission.MANAGE_EXTERNAL_STORAGE"
-        tools:ignore="ScopedStorage" />
-
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE_SPECIAL_USE" />
 
     <application
@@ -25,9 +20,9 @@
         android:label="${appName}"
         android:requestLegacyExternalStorage="true"
         android:theme="@style/Theme.LaughingLogger"
-        tools:ignore="GoogleAppIndexingWarning">
+        tools:ignore="GoogleAppIndexingWarning,HardcodedDebugMode">
 
-        <!--TODO: REMOVE THIS CONFIGCHANGES ATROCITY-->
+
         <activity
             android:name="org.laughing.logger.ui.LogcatActivity"
             android:configChanges="screenSize|orientation"
