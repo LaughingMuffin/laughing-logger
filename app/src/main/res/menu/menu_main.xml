@@ -3,11 +3,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <!--<item-->
-        <!--android:id="@+id/menu_search"-->
-        <!--android:icon="@drawable/ic_search"-->
-        <!--android:title="@string/search"-->
-        <!--app:actionViewClass="androidx.appcompat.widget.SearchView"-->
-        <!--app:showAsAction="always|collapseActionView" />-->
+    <!--android:id="@+id/menu_search"-->
+    <!--android:icon="@drawable/ic_search"-->
+    <!--android:title="@string/search"-->
+    <!--app:actionViewClass="androidx.appcompat.widget.SearchView"-->
+    <!--app:showAsAction="always|collapseActionView" />-->
+
+    <item
+        android:id="@+id/menu_play_ad"
+        android:icon="@drawable/round_ads_click_24"
+        android:title="@string/show_ad"
+        app:showAsAction="always" />
 
     <item
         android:id="@+id/menu_play_pause"
@@ -19,7 +25,7 @@
         android:id="@+id/menu_expand_all"
         android:icon="@drawable/ic_expand_more_white_24dp"
         android:title="@string/expand_all"
-        app:showAsAction="always" />
+        app:showAsAction="ifRoom" />
 
     <item
         android:id="@+id/menu_clear"
@@ -104,6 +110,6 @@
     <item
         android:id="@+id/menu_crazy_logger_service"
         android:alphabeticShortcut="Crazy Logger"
-        android:title="Crazy Logger" />
+        android:title="@string/crazy_logger" />
 
 </menu>

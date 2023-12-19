@@ -1,5 +1,7 @@
 package org.laughing.logger.ui;
 
+import static org.laughing.logger.App.MUFFIN_ADS;
+
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.ClipData;
@@ -53,6 +55,12 @@ import androidx.vectordrawable.graphics.drawable.VectorDrawableCompat;
 
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
+import com.google.android.gms.ads.AdError;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.FullScreenContentCallback;
+import com.google.android.gms.ads.LoadAdError;
+import com.google.android.gms.ads.interstitial.InterstitialAd;
+import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback;
 import com.google.android.material.bottomappbar.BottomAppBar;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
@@ -146,6 +154,7 @@ public class LogcatActivity extends BaseActivity implements FilterListener, LogL
     private FloatingActionButton mFab;
     private BottomAppBar mAppBar;
     private SearchView searchView;
+    private InterstitialAd mInterstitialAd;
 
     public static void startChooser(Context context, String subject, String body, SendLogDetails.AttachmentType attachmentType, File attachment) {
 
@@ -252,6 +261,61 @@ public class LogcatActivity extends BaseActivity implements FilterListener, LogL
         runUpdatesIfNecessaryAndShowWelcomeMessage();
 
         initSearchView();
+
+        AdRequest adRequest = new AdRequest.Builder().build();
+
+        InterstitialAd.load(this, "ca-app-pub-3940256099942544/1033173712", adRequest,
+                new InterstitialAdLoadCallback() {
+                    @Override
+                    public void onAdLoaded(@NonNull InterstitialAd interstitialAd) {
+                        // The mInterstitialAd reference will be null until
+                        // an ad is loaded.
+                        mInterstitialAd = interstitialAd;
+                        Log.i(MUFFIN_ADS, "onAdLoaded");
+
+                        mInterstitialAd.setFullScreenContentCallback(new FullScreenContentCallback() {
+                            @Override
+                            public void onAdClicked() {
+                                // Called when a click is recorded for an ad.
+                                Log.d(MUFFIN_ADS, "Ad was clicked.");
+                            }
+
+                            @Override
+                            public void onAdDismissedFullScreenContent() {
+                                // Called when ad is dismissed.
+                                // Set the ad reference to null so you don't show the ad a second time.
+                                Log.d(MUFFIN_ADS, "Ad dismissed fullscreen content.");
+                                mInterstitialAd = null;
+                            }
+
+                            @Override
+                            public void onAdFailedToShowFullScreenContent(AdError adError) {
+                                // Called when ad fails to show.
+                                Log.e(MUFFIN_ADS, "Ad failed to show fullscreen content.");
+                                mInterstitialAd = null;
+                            }
+
+                            @Override
+                            public void onAdImpression() {
+                                // Called when an impression is recorded for an ad.
+                                Log.d(MUFFIN_ADS, "Ad recorded an impression.");
+                            }
+
+                            @Override
+                            public void onAdShowedFullScreenContent() {
+                                // Called when ad is shown.
+                                Log.d(MUFFIN_ADS, "Ad showed fullscreen content.");
+                            }
+                        });
+                    }
+
+                    @Override
+                    public void onAdFailedToLoad(@NonNull LoadAdError loadAdError) {
+                        // Handle the error
+                        Log.d(MUFFIN_ADS, loadAdError.toString());
+                        mInterstitialAd = null;
+                    }
+                });
     }
 
     private void handleShortcuts(String action) {
@@ -533,11 +597,17 @@ public class LogcatActivity extends BaseActivity implements FilterListener, LogL
 
         MenuItem clear = menu.findItem(R.id.menu_clear);
         MenuItem pause = menu.findItem(R.id.menu_play_pause);
+
         clear.setVisible(mCurrentlyOpenLog == null);
         pause.setVisible(mCurrentlyOpenLog == null);
 
         MenuItem saveLogMenuItem = menu.findItem(R.id.menu_save_log);
         MenuItem saveAsLogMenuItem = menu.findItem(R.id.menu_save_as_log);
+        MenuItem playAd = menu.findItem(R.id.menu_play_ad);
+
+
+        playAd.setVisible(showingMainLog);
+        playAd.setVisible(showingMainLog);
 
         saveLogMenuItem.setEnabled(showingMainLog);
         saveLogMenuItem.setVisible(showingMainLog);
@@ -634,6 +704,13 @@ public class LogcatActivity extends BaseActivity implements FilterListener, LogL
             case R.id.menu_filters:
                 showFiltersDialog();
                 return true;
+            case R.id.menu_play_ad:
+                if (mInterstitialAd != null) {
+                    mInterstitialAd.show(this);
+                } else {
+                    Log.d(MUFFIN_ADS, "The interstitial ad wasn't ready yet.");
+                }
+                break;
         }
         return false;
     }

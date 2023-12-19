@@ -13,8 +13,8 @@ android {
         applicationId "org.laughing.logger"
         minSdkVersion 21
         targetSdkVersion 34
-        versionName '3.0.1'
-        versionCode 301
+        versionName '3.0.2'
+        versionCode 302
 
         multiDexEnabled true
 
@@ -91,6 +91,8 @@ dependencies {
     playImplementation platform('com.google.firebase:firebase-bom:32.6.0')
     playImplementation("com.google.firebase:firebase-crashlytics")
     playImplementation("com.google.firebase:firebase-analytics")
+
+    implementation 'com.google.android.gms:play-services-ads:22.6.0'
 
     // do not upgrade (for now)
     implementation 'com.mikhaellopez:circularprogressbar:2.0.0'
