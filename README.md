@@ -19,6 +19,8 @@ It shows a scrolling (tailed) view of the Android "logcat" system log,
 hence the goofy name. <br> It also allows you to record logs in real time, send logs via email,
 and filter using a variety of criteria.
 
+[![How to install - Laughing Logger](https://i.imgur.com/SsfjCFr.png)](https://youtu.be/6KkvyYbETv0)
+
 FAQs
 -------------
 Taken from CatLog's FAQ:
