@@ -52,10 +52,16 @@ If that still doesn't work, you can contact the creator of your ROM to file a bu
 Development
 -------------
 
+- Declare `AD_APP_ID` in your local.properties
+  - This is your APP ID
+- Declare `AD_ON_CLICK_ID` in your local.properties
+  - This is your Interstitial AD ID
 - Select `fdroid` build variants to build and run immediately
 - For `play` variants:
     - Put `google-services.json` from Firebase in app/src/main/play/
     - Put signing keys in local.properties
+
+For more info on how to setup AdMob consult their guidelines.
 
 License
 ---------
