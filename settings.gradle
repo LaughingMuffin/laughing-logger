@@ -3,8 +3,7 @@ pluginManagement {
         gradlePluginPortal()
         google()
         mavenCentral()
-        jcenter()
-        maven { url "https://jitpack.io" }
+        maven { url = "https://jitpack.io" }
     }
 }
 dependencyResolutionManagement {
@@ -13,8 +12,7 @@ dependencyResolutionManagement {
         gradlePluginPortal()
         google()
         mavenCentral()
-        jcenter()
-        maven { url "https://jitpack.io" }
+        maven { url = "https://jitpack.io" }
     }
 }
 rootProject.name = "Laughing Logger"

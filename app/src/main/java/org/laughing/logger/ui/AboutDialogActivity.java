@@ -8,6 +8,7 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 
 import com.afollestad.materialdialogs.MaterialDialog;
+
 import org.laughing.logger.R;
 import org.laughing.logger.helper.PackageHelper;
 import org.laughing.logger.util.ThemeWrapper;
@@ -84,8 +85,6 @@ public class AboutDialogActivity extends BaseActivity {
         @Override
         public Dialog onCreateDialog(Bundle savedInstanceState) {
             WebView view = new WebView(getActivity());
-/*
-            view.setWebViewClient(new AboutWebClient());*/
             initializeWebView(view);
 
             return new MaterialDialog.Builder(getActivity())
@@ -95,38 +94,5 @@ public class AboutDialogActivity extends BaseActivity {
                     .positiveText(android.R.string.ok)
                     .build();
         }
-
-
-        /*private void loadExternalUrl(String url) {
-            Intent intent = new Intent();
-            intent.setAction("android.intent.action.VIEW");
-            intent.setData(Uri.parse(url));
-
-            startActivity(intent);
-        }*/
-
-        /*private class AboutWebClient extends WebViewClient {
-
-            @Override
-            public boolean shouldOverrideUrlLoading(WebView view, final String url) {
-                log.d("shouldOverrideUrlLoading");
-
-                // XXX hack to make the webview go to an external url if the hyperlink is
-                // in my own HTML file - otherwise it says "Page not available" because I'm not calling
-                // loadDataWithBaseURL.  But if I call loadDataWithBaseUrl using a fake URL, then
-                // the links within the page itself don't work!!  Arggggh!!!
-
-                if (url.startsWith("http") || url.startsWith("mailto") || url.startsWith("market")) {
-                    handler.post(new Runnable() {
-                        @Override
-                        public void run() {
-                            loadExternalUrl(url);
-                        }
-                    });
-                    return true;
-                }
-                return false;
-            }
-        }*/
     }
 }

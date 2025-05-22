@@ -47,7 +47,7 @@ public class LogcatRecordingService extends IntentService {
     public static final String EXTRA_LOADER = "loader";
     public static final String EXTRA_QUERY_FILTER = "filter";
     public static final String EXTRA_LEVEL = "level";
-    private static final String ACTION_STOP_RECORDING = "com.pluscubed.catlog.action.STOP_RECORDING";
+    private static final String ACTION_STOP_RECORDING = "org.laughing.logger.action.STOP_RECORDING";
     private static UtilLogger log = new UtilLogger(LogcatRecordingService.class);
     private final Object lock = new Object();
     private LogcatReader mReader;
@@ -80,6 +80,7 @@ public class LogcatRecordingService extends IntentService {
         intentFilter.addDataScheme(URI_SCHEME);
 
         try {
+            // we keep this regardless, we try and fail for sure but you never know
             registerReceiver(receiver, intentFilter);
         } catch (SecurityException securityException) {
             registerReceiver(receiver, intentFilter, RECEIVER_EXPORTED);

@@ -1,7 +1,5 @@
 package org.laughing.logger.ui;
 
-import static org.laughing.logger.App.MUFFIN_ADS;
-
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.ClipData;
@@ -55,12 +53,6 @@ import androidx.vectordrawable.graphics.drawable.VectorDrawableCompat;
 
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
-import com.google.android.gms.ads.AdError;
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.FullScreenContentCallback;
-import com.google.android.gms.ads.LoadAdError;
-import com.google.android.gms.ads.interstitial.InterstitialAd;
-import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback;
 import com.google.android.material.bottomappbar.BottomAppBar;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
@@ -154,7 +146,6 @@ public class LogcatActivity extends BaseActivity implements FilterListener, LogL
     private FloatingActionButton mFab;
     private BottomAppBar mAppBar;
     private SearchView searchView;
-    private InterstitialAd mInterstitialAd;
 
     public static void startChooser(Context context, String subject, String body, SendLogDetails.AttachmentType attachmentType, File attachment) {
 
@@ -227,9 +218,6 @@ public class LogcatActivity extends BaseActivity implements FilterListener, LogL
         list.setLayoutManager(new LinearLayoutManager(this));
         list.setItemAnimator(null);
 
-        //RecyclerViewFastScroller fastScroller = findViewById(R.id.fastScroller);
-        //fastScroller.attachRecyclerView(list);
-
         FastScrollerBuilder fastScrollerBuilder = new FastScrollerBuilder(list);
         fastScrollerBuilder.disableScrollbarAutoHide();
         fastScrollerBuilder.build();
@@ -261,61 +249,6 @@ public class LogcatActivity extends BaseActivity implements FilterListener, LogL
         runUpdatesIfNecessaryAndShowWelcomeMessage();
 
         initSearchView();
-
-        AdRequest adRequest = new AdRequest.Builder().build();
-
-        InterstitialAd.load(this, BuildConfig.AD_ON_CLICK_ID, adRequest,
-                new InterstitialAdLoadCallback() {
-                    @Override
-                    public void onAdLoaded(@NonNull InterstitialAd interstitialAd) {
-                        // The mInterstitialAd reference will be null until
-                        // an ad is loaded.
-                        mInterstitialAd = interstitialAd;
-                        Log.i(MUFFIN_ADS, "onAdLoaded");
-
-                        mInterstitialAd.setFullScreenContentCallback(new FullScreenContentCallback() {
-                            @Override
-                            public void onAdClicked() {
-                                // Called when a click is recorded for an ad.
-                                Log.d(MUFFIN_ADS, "Ad was clicked.");
-                            }
-
-                            @Override
-                            public void onAdDismissedFullScreenContent() {
-                                // Called when ad is dismissed.
-                                // Set the ad reference to null so you don't show the ad a second time.
-                                Log.d(MUFFIN_ADS, "Ad dismissed fullscreen content.");
-                                mInterstitialAd = null;
-                            }
-
-                            @Override
-                            public void onAdFailedToShowFullScreenContent(AdError adError) {
-                                // Called when ad fails to show.
-                                Log.e(MUFFIN_ADS, "Ad failed to show fullscreen content.");
-                                mInterstitialAd = null;
-                            }
-
-                            @Override
-                            public void onAdImpression() {
-                                // Called when an impression is recorded for an ad.
-                                Log.d(MUFFIN_ADS, "Ad recorded an impression.");
-                            }
-
-                            @Override
-                            public void onAdShowedFullScreenContent() {
-                                // Called when ad is shown.
-                                Log.d(MUFFIN_ADS, "Ad showed fullscreen content.");
-                            }
-                        });
-                    }
-
-                    @Override
-                    public void onAdFailedToLoad(@NonNull LoadAdError loadAdError) {
-                        // Handle the error
-                        Log.d(MUFFIN_ADS, loadAdError.toString());
-                        mInterstitialAd = null;
-                    }
-                });
     }
 
     private void handleShortcuts(String action) {
@@ -603,11 +536,6 @@ public class LogcatActivity extends BaseActivity implements FilterListener, LogL
 
         MenuItem saveLogMenuItem = menu.findItem(R.id.menu_save_log);
         MenuItem saveAsLogMenuItem = menu.findItem(R.id.menu_save_as_log);
-        MenuItem playAd = menu.findItem(R.id.menu_play_ad);
-
-
-        playAd.setVisible(showingMainLog);
-        playAd.setVisible(showingMainLog);
 
         saveLogMenuItem.setEnabled(showingMainLog);
         saveLogMenuItem.setVisible(showingMainLog);
@@ -704,13 +632,6 @@ public class LogcatActivity extends BaseActivity implements FilterListener, LogL
             case R.id.menu_filters:
                 showFiltersDialog();
                 return true;
-            case R.id.menu_play_ad:
-                if (mInterstitialAd != null) {
-                    mInterstitialAd.show(this);
-                } else {
-                    Log.d(MUFFIN_ADS, "The interstitial ad wasn't ready yet.");
-                }
-                break;
         }
         return false;
     }
@@ -1512,7 +1433,6 @@ public class LogcatActivity extends BaseActivity implements FilterListener, LogL
     private void openLogFile(final String filename) {
 
         // do in background to avoid jank
-
         @SuppressLint("StaticFieldLeak") final AsyncTask<Void, Void, List<LogLine>> openFileTask = new AsyncTask<Void, Void, List<LogLine>>() {
 
             @Override
@@ -1521,7 +1441,7 @@ public class LogcatActivity extends BaseActivity implements FilterListener, LogL
                 resetDisplayedLog(filename);
 
                 showProgressBar();
-                ((CircularProgressBar) findViewById(R.id.main_progress_bar)).enableIndeterminateMode(false);
+                ((CircularProgressBar) findViewById(R.id.main_progress_bar)).setIndeterminateMode(false);
             }
 
             @Override
@@ -1579,7 +1499,6 @@ public class LogcatActivity extends BaseActivity implements FilterListener, LogL
             openFileTask.execute((Void) null);
         }
 
-
     }
 
     void hideProgressBar() {
@@ -1587,7 +1506,7 @@ public class LogcatActivity extends BaseActivity implements FilterListener, LogL
     }
 
     private void showProgressBar() {
-        ((CircularProgressBar) findViewById(R.id.main_progress_bar)).setColor(App.getColorFromAttr(this, R.attr.colorAccent));
+        ((CircularProgressBar) findViewById(R.id.main_progress_bar)).setProgressBarColor(App.getColorFromAttr(this, R.attr.colorAccent));
         findViewById(R.id.main_progress_bar).setVisibility(View.VISIBLE);
     }
 
@@ -1603,19 +1522,6 @@ public class LogcatActivity extends BaseActivity implements FilterListener, LogL
 
     private void updateUiForFilename() {
         boolean logFileMode = mCurrentlyOpenLog != null;
-//        if (logFileMode) {
-//            Snackbar snackbar = Snackbar.make(mAppBar, mCurrentlyOpenLog, Snackbar.LENGTH_LONG);
-//            View v = snackbar.getView();
-//            CoordinatorLayout.LayoutParams params = (CoordinatorLayout.LayoutParams) v.getLayoutParams();
-//            params.setMargins(
-//                    params.leftMargin,
-//                    params.topMargin,
-//                    params.rightMargin,
-//                    params.bottomMargin + mAppBar.getHeight()
-//            );
-//            v.setLayoutParams(params);
-//            snackbar.show();
-//        }
 
         if (logFileMode) {
             Toast.makeText(this, mCurrentlyOpenLog, Toast.LENGTH_SHORT).show();
@@ -1678,16 +1584,8 @@ public class LogcatActivity extends BaseActivity implements FilterListener, LogL
 
                 // if the bottom of the list isn't visible anymore, then stop autoscrolling
                 mAutoscrollToBottom = (layoutManager.findLastCompletelyVisibleItemPosition() == recyclerView.getAdapter().getItemCount() - 1);
-
-                // only hide the fast scroll if we're unpaused and at the bottom of the list
-                // TODO:
-                //boolean enableFastScroll = mTask == null || mTask.isPaused() || !mAutoscrollToBottom;
-                //mListView.setFastScrollEnabled(enableFastScroll);
-
             }
         });
-
-        //((RecyclerView) findViewById(R.id.list)).setHasFixedSize(true);
     }
 
     private void completePartialSelect() {
@@ -1775,7 +1673,6 @@ public class LogcatActivity extends BaseActivity implements FilterListener, LogL
     public void onFilterComplete(int count) {
         // always scroll to the bottom when searching
         ((RecyclerView) findViewById(R.id.list)).scrollToPosition(count - 1);
-
     }
 
 
@@ -1789,10 +1686,6 @@ public class LogcatActivity extends BaseActivity implements FilterListener, LogL
         final int color = colorScheme.getBackgroundColor(LogcatActivity.this);
 
         mHandler.post(() -> findViewById(R.id.main_background).setBackgroundColor(color));
-
-        //TODO:
-        //mListView.setCacheColorHint(color);
-        //mListView.setDivider(new ColorDrawable(color));
     }
 
 
@@ -1818,21 +1711,6 @@ public class LogcatActivity extends BaseActivity implements FilterListener, LogL
     public void invalidateDarkOrLightMenuItems(Context context, Menu menu) {
         if (menu instanceof MenuBuilder) {
             ((MenuBuilder) menu).setOptionalIconsVisible(true);
-            /*final boolean darkMode = ThemeUtils.isDarkMode(context);
-            final int textColorPrimary = Utils.resolveColor(context, android.R.attr.textColorPrimary);
-
-            mToolbar.post(new Runnable() {
-                @Override
-                public void run() {
-                    for (int i = 0; i < menu.size(); i++) {
-                        MenuItemImpl item = (MenuItemImpl) menu.getItem(i);
-                        int color = darkMode || item.isActionButton() ? Color.WHITE : textColorPrimary;
-                        if (item.getIcon() != null) {
-                            item.getIcon().setColorFilter(color, PorterDuff.Mode.SRC_IN);
-                        }
-                    }
-                }
-            });*/
         }
     }
 
@@ -1859,7 +1737,7 @@ public class LogcatActivity extends BaseActivity implements FilterListener, LogL
             resetDisplayedLog(null);
 
             showProgressBar();
-            ((CircularProgressBar) findViewById(R.id.main_progress_bar)).enableIndeterminateMode(true);
+            ((CircularProgressBar) findViewById(R.id.main_progress_bar)).setIndeterminateMode(true);
         }
 
         @Override
