@@ -10,12 +10,6 @@
     <!--app:showAsAction="always|collapseActionView" />-->
 
     <item
-        android:id="@+id/menu_play_ad"
-        android:icon="@drawable/round_ads_click_24"
-        android:title="@string/show_ad"
-        app:showAsAction="always" />
-
-    <item
         android:id="@+id/menu_play_pause"
         android:icon="@drawable/ic_pause_white_24dp"
         android:title="@string/pause_unpause"
