@@ -108,3 +108,14 @@ dependencies {
 
 // google-services is already applied via the plugins {} block above.
 apply plugin: 'com.google.firebase.crashlytics'
+
+// Crashlytics applies globally, but fdroid ships no google-services.json
+// (see googleServices.missingGoogleServicesStrategy above). Disable its
+// per-variant tasks for fdroid so they don't fail looking up the appId.
+android.applicationVariants.configureEach { variant ->
+    if (variant.flavorName == 'fdroid') {
+        def suffix = variant.name.capitalize()
+        tasks.matching { it.name.contains('Crashlytics') && it.name.endsWith(suffix) }
+                .configureEach { enabled = false }
+    }
+}
