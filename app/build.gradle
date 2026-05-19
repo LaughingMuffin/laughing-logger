@@ -16,8 +16,8 @@ android {
         applicationId "org.laughing.logger"
         minSdk 21
         targetSdkVersion 35
-        versionName '3.0.3'
-        versionCode 303
+        versionName '3.0.4'
+        versionCode 304
 
         multiDexEnabled true
 
