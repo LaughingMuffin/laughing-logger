@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
     <!-- non-translateable strings-->
 
 
     <string name="app_name" translatable="false">Laughing Logger</string>
-    <string name="app_name_libre" translatable="false">Laughing Logger</string>
-
-    <string name="donate_version_name" translatable="false">Donate</string>
+    <!-- Referenced from app/build.gradle manifestPlaceholder for the fdroid flavor. -->
+    <string name="app_name_libre" translatable="false" tools:ignore="UnusedResources">Laughing Logger</string>
 
     <string name="log_level_debug" translatable="false">Debug</string>
     <string name="log_level_error" translatable="false">Error</string>
@@ -71,9 +70,6 @@
         <item quantity="other">%d files will be deleted</item>
     </plurals>
 
-    <string name="as_attachment">As Attachment</string>
-    <string name="as_text">As Text</string>
-
     <string name="checkbox_never_show_partial_select_help">Don\'t show again</string>
 
     <string name="copied_to_clipboard">Copied to clipboard.</string>
@@ -86,8 +82,6 @@
     <string name="delete_saved_log">Delete Saved Logs</string>
     <string name="delimiter">, </string>
     <string name="dialog_compiling_log">Compiling log…</string>
-    <string name="dialog_for_donate">For <b>bonus color\nschemes</b>, download\n<a href="market://details?id=org.laughing.logger.donate">LaughingLogger Donate</a></string>
-    <string name="dialog_for_widget">For a <b>widget</b>,\ndo Home → Long\npress → Widgets</string>
     <string name="dialog_initializing_recorder">Loading recorder…</string>
     <string name="dialog_loading_updates">Loading updates…</string>
     <string name="dialog_partial_select_explanation">1. Select the <b>first</b> line.\n2. Then select the <b>last</b> line.</string>
@@ -106,17 +100,11 @@
     <string name="filter_choice_tag">Tag</string>
     <string name="filter_text_colon">Filter text:</string>
 
-    <string name="first_run_pref_summary">Show introductory message again.</string>
-    <string name="first_run_pref_title">Reset Introduction</string>
-    <string name="first_run_title">Welcome to LaughingLogger!</string>
-
     <string name="log_cleared">Logs cleared</string>
     <string name="log_level">Log Level</string>
     <string name="log_level_colon">Log level:</string>
     <string name="log_recording_started">Log recording started.</string>
     <string name="log_saved">Log saved.</string>
-
-    <string name="main_edit_text_hint">Search logs</string>
 
     <string name="manage_saved_logs">Manage Saved Logs</string>
 
@@ -160,12 +148,9 @@
     <string name="pref_theme_choice_sprint_name">Big Yellow</string>
     <string name="pref_theme_choice_tmobile_name">T-Mo</string>
     <string name="pref_theme_choice_verizon_name">Big Red</string>
-    <string name="pref_theme_summary_free">Requires donate version.</string>
     <string name="pref_theme_title">Color Scheme</string>
 
     <string name="record_log">Record Log</string>
-
-    <string name="recording_in_progress">Recording already in progress.</string>
 
     <string name="save">Save</string>
     <string name="save_as">Save As…</string>
@@ -175,9 +160,6 @@
 
     <string name="select_logs_to_delete">Select which logs to delete.</string>
 
-    <string name="send_as_attachment">Send as Attachment</string>
-    <string name="send_as_text">Send as Text</string>
-    <string name="send_log">Send</string>
     <string name="send_log_title">Send Log</string>
 
     <string name="settings">Settings</string>
@@ -185,8 +167,6 @@
     <string name="simultaneous"> (Simultaneous)</string>
 
     <string name="start_recording_log">Record</string>
-
-    <string name="stop_recording_log">Stop Recording</string>
 
     <string name="subject_log_report">Log report</string>
 
@@ -211,7 +191,6 @@
         <item quantity="other">Log too large; showing last %d lines.</item>
     </plurals>
 
-    <string name="toast_no_root">Could not obtain root.  You will only see LaughingLogger\'s own logs.</string>
     <string name="toast_pref_changed_restart_required">Setting updated. Restart LaughingLogger to see the changes.</string>
     <string name="toast_request_root">LaughingLogger requires root (superuser) access to read logs.</string>
     <string name="toast_started_select_partial">Select Partial mode enabled</string>
@@ -235,7 +214,6 @@
     <string name="adb_command">ADB Command</string>
 
     <string name="permission_not_granted">This feature will not work without permission to write external storage.</string>
-    <string name="search">Search</string>
     <string name="scrubber">Omit sensitive info</string>
     <string name="scrubber_summary">Omit sensitive info like web urls, phone numbers or emails</string>
 
@@ -250,6 +228,5 @@
     <string name="search_hint">Search for logs…</string>
     <string name="pref_ui_accent">Accent color</string>
     <string name="theme_amoled">AMOLED</string>
-    <string name="show_ad">Show AD</string>
     <string name="crazy_logger">Crazy Logger</string>
 </resources>

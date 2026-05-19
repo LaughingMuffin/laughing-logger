@@ -16,8 +16,6 @@
         <item quantity="many">%d файлов будет удалено</item>
     </plurals>
 
-    <string name="as_attachment">Как вложение</string>
-    <string name="as_text">Как текст</string>
 
     <string name="checkbox_never_show_partial_select_help">Не показывать снова</string>
 
@@ -31,8 +29,6 @@
     <string name="delete_saved_log">Удалить сохранённые логи</string>
     <string name="delimiter">, </string>
     <string name="dialog_compiling_log">Компиляция лога…</string>
-    <string name="dialog_for_donate">For <b>bonus color\nschemes</b>, download\n<a href="market://details?id=org.laughing.logger.donate">Laughing Logger Donate</a></string>
-    <string name="dialog_for_widget">For a <b>widget</b>,\ndo Home → Long\npress → Widgets</string>
     <string name="dialog_initializing_recorder">Загрузка рекордера…</string>
     <string name="dialog_loading_updates">Загрузка обновлений…</string>
     <string name="dialog_partial_select_explanation">1. Выберите <b>первую</b> линию.\n2. Теперь выберите <b>последнюю</b> линию.</string>
@@ -53,9 +49,6 @@
     <string name="filter_choice_tag">Тег</string>
     <string name="filter_text_colon">Фильтр текста:</string>
 
-    <string name="first_run_pref_summary">Показать обучающее сообщение еще раз.</string>
-    <string name="first_run_pref_title">Показать сообщение</string>
-    <string name="first_run_title">Добро пожаловать в Laughing Logger!</string>
 
     <string name="log_cleared">Логи очищены</string>
     <string name="log_level">Уровень лога</string>
@@ -63,7 +56,6 @@
     <string name="log_recording_started">Идёт запись лога.</string>
     <string name="log_saved">Лог сохранён.</string>
 
-    <string name="main_edit_text_hint">Поиск логов</string>
 
     <string name="manage_saved_logs">Управление логами</string>
 
@@ -105,12 +97,10 @@
     <string name="pref_theme_choice_sprint_name">Big Yellow</string>
     <string name="pref_theme_choice_tmobile_name">T-Mo</string>
     <string name="pref_theme_choice_verizon_name">Big Red</string>
-    <string name="pref_theme_summary_free">Requires donate version.</string>
     <string name="pref_theme_title">Цветовая схема</string>
 
     <string name="record_log">Записать лог</string>
 
-    <string name="recording_in_progress">Запись лога уже запущена.</string>
 
     <string name="save">Сохранить</string>
     <string name="save_as">Сохранить как…</string>
@@ -120,9 +110,6 @@
 
     <string name="select_logs_to_delete">Выберите удаляемые логи.</string>
 
-    <string name="send_as_attachment">Отправить как вложение</string>
-    <string name="send_as_text">Отправить как текст</string>
-    <string name="send_log">Отправить</string>
     <string name="send_log_title">Отправить лог</string>
 
     <string name="settings">Настройки</string>
@@ -131,7 +118,6 @@
 
     <string name="start_recording_log">Запись</string>
 
-    <string name="stop_recording_log">Остановить запись</string>
 
     <string name="subject_log_report">Лог ошибки/Log report</string>
 
@@ -158,7 +144,6 @@
         <item quantity="many">Лог слишком большой; отображаются последние %d линий.</item>
     </plurals>
 
-    <string name="toast_no_root">Невозможно получить root. Вы видите только логи Laughing Logger.</string>
     <string name="toast_pref_changed_restart_required">Настройка изменена. Перезапустите Laughing Logger для применения изменений.</string>
     <string name="toast_request_root">Laughing Logger требует root (superuser) для чтения логов.</string>
     <string name="toast_started_select_partial">Частичный выбор активирован</string>
@@ -182,7 +167,6 @@
     <string name="adb_command">Команда ADB</string>
 
     <string name="permission_not_granted">Эта функция не будет работать без разрешения на запись во внутр. накопитель</string>
-    <string name="search">Поиск</string>
     <string name="scrubber">Omit sensitive info</string>
     <string name="scrubber_summary">Omit sensitive info like web urls, phone numbers or emails</string>
     <string name="text_include_dmesg">Добавить лог ядра</string>
