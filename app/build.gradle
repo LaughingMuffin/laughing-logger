@@ -10,7 +10,7 @@ plugins {
 
 android {
     namespace 'org.laughing.logger'
-    compileSdk = 35
+    compileSdk = 37
 
     defaultConfig {
         applicationId "org.laughing.logger"
@@ -48,7 +48,7 @@ android {
         release {
             minifyEnabled true
             shrinkResources true
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             if (project.hasProperty("RELEASE_STORE_FILE")) {
                 signingConfig signingConfigs.release
             } else {
@@ -82,7 +82,7 @@ android {
 dependencies {
     implementation 'androidx.appcompat:appcompat:1.7.1'
     implementation "androidx.recyclerview:recyclerview:1.4.0"
-    implementation 'androidx.annotation:annotation:1.9.1'
+    implementation 'androidx.annotation:annotation:1.10.0'
     // No longer pulled in transitively by appcompat 1.7+. Deprecated upstream;
     // a future refactor should replace it with a non-broadcast mechanism.
     implementation 'androidx.localbroadcastmanager:localbroadcastmanager:1.1.0'
