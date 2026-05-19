@@ -58,7 +58,7 @@ Development
   - This is your Interstitial AD ID
 - Select `fdroid` build variants to build and run immediately
 - For `play` variants:
-    - Put `google-services.json` from Firebase in app/src/main/play/
+    - Put `google-services.json` from Firebase in app/src/play/
     - Put signing keys in local.properties
 
 For more info on how to setup AdMob consult their guidelines.

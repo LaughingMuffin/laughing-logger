@@ -11,7 +11,7 @@ Laughing Logger is an Android logcat viewer (Java, minSdk 21, targetSdk 34, AGP 
 Two `store` flavors × two build types give four variants. Always specify a variant — `assembleDebug` alone is ambiguous.
 
 - **fdroid** — open-source variant. No Firebase, no AdMob, no signing required. Use this for local development.
-- **play** — Play Store variant. Pulls in Firebase Crashlytics/Analytics and AdMob. Requires `google-services.json` at `app/src/play/` (note: the README incorrectly says `app/src/main/play/`) and AdMob IDs in `local.properties` (`AD_APP_ID`, `AD_ON_CLICK_ID`) — these are injected at build time via the `secrets-gradle-plugin`.
+- **play** — Play Store variant. Pulls in Firebase Crashlytics/Analytics and AdMob. Requires `google-services.json` at `app/src/play/` and AdMob IDs in `local.properties` (`AD_APP_ID`, `AD_ON_CLICK_ID`) — these are injected at build time via the `secrets-gradle-plugin`.
 
 Release signing is optional and gated on `RELEASE_STORE_FILE` being present in `local.properties` (with `RELEASE_STORE_PASSWORD`, `RELEASE_KEY_ALIAS_LL`, `RELEASE_KEY_PASSWORD_LL`); without it, release builds fall back to the debug signing config.
 
