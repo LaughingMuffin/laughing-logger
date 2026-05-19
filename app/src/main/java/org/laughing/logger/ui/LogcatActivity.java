@@ -496,7 +496,7 @@ public class LogcatActivity extends BaseActivity implements FilterListener, LogL
         List<String> actualSuggestions = new ArrayList<>();
         if (query != null) {
             for (String suggestion : suggestions) {
-                if (suggestion.toLowerCase().startsWith(query.toLowerCase())) {
+                if (suggestion.toLowerCase(Locale.ROOT).startsWith(query.toLowerCase(Locale.ROOT))) {
                     actualSuggestions.add(suggestion);
                 }
             }
