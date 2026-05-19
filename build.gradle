@@ -5,8 +5,8 @@ buildscript {
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:8.13.2'
-        classpath 'com.google.gms:google-services:4.4.0'
-        classpath 'com.github.ben-manes:gradle-versions-plugin:0.50.0'
+        classpath 'com.google.gms:google-services:4.4.4'
+        classpath 'com.github.ben-manes:gradle-versions-plugin:0.54.0'
         classpath 'com.google.firebase:firebase-crashlytics-gradle:2.9.9'
         classpath "com.google.android.libraries.mapsplatform.secrets-gradle-plugin:secrets-gradle-plugin:2.0.1"
     }
@@ -15,7 +15,7 @@ buildscript {
 plugins {
     id 'com.android.application' version '8.13.2' apply false
     id 'com.android.library' version '8.13.2' apply false
-    id 'com.github.ben-manes.versions' version '0.50.0' apply false
+    id 'com.github.ben-manes.versions' version '0.54.0'
 }
 
 allprojects {
