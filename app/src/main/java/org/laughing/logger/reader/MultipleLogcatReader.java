@@ -1,7 +1,5 @@
 package org.laughing.logger.reader;
 
-import android.os.AsyncTask;
-
 import org.laughing.logger.util.UtilLogger;
 
 import java.io.IOException;
@@ -69,17 +67,12 @@ public class MultipleLogcatReader extends AbsLogcatReader {
         }
 
         // do in background, because otherwise we might hang
-        new AsyncTask<Void, Void, Void>() {
-
-            @Override
-            protected Void doInBackground(Void... params) {
-                for (ReaderThread thread : readerThreads) {
-                    thread.reader.killQuietly();
-                }
-                queue.offer(DUMMY_NULL);
-                return null;
+        new Thread(() -> {
+            for (ReaderThread thread : readerThreads) {
+                thread.reader.killQuietly();
             }
-        }.execute((Void) null);
+            queue.offer(DUMMY_NULL);
+        }, "MultipleLogcatReader-kill").start();
     }
 
 
