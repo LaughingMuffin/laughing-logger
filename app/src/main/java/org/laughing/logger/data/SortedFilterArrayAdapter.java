@@ -33,6 +33,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * NOLAN'S NOTE: This source code is copied from ArrayAdapter.  The only thing I'm changing is the getFilter()
@@ -418,7 +419,7 @@ public class SortedFilterArrayAdapter<T> extends BaseAdapter implements Filterab
                     results.count = list.size();
                 }
             } else {
-                String prefixString = prefix.toString().toLowerCase();
+                String prefixString = prefix.toString().toLowerCase(Locale.ROOT);
 
                 final ArrayList<T> values = mOriginalValues;
                 final int count = values.size();
@@ -427,7 +428,7 @@ public class SortedFilterArrayAdapter<T> extends BaseAdapter implements Filterab
 
                 for (int i = 0; i < count; i++) {
                     final T value = values.get(i);
-                    final String valueText = value.toString().toLowerCase();
+                    final String valueText = value.toString().toLowerCase(Locale.ROOT);
 
                     // Only match against the whole, non-splitted value
                     if (valueText.startsWith(prefixString)) {

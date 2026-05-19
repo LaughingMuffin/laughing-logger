@@ -21,10 +21,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ellipsize="marquee"
+            android:singleLine="true"
             android:paddingBottom="8dp"
             android:text="@string/filter_choice_tag"
-            android:textSize="16sp"
-            android:maxLines="1" />
+            android:textSize="16sp" />
 
         <TextView
             android:id="@id/dialog_searchby_tag_text"
@@ -36,7 +36,7 @@
             android:textSize="12sp"
             android:typeface="monospace"
             tools:text="text"
-            android:maxLines="1" />
+            android:singleLine="true" />
 
     </LinearLayout>
 
@@ -53,10 +53,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ellipsize="marquee"
+            android:singleLine="true"
             android:paddingBottom="8dp"
             android:text="@string/filter_choice_pid"
-            android:textSize="16sp"
-            android:maxLines="1" />
+            android:textSize="16sp" />
 
         <TextView
             android:id="@id/dialog_searchby_pid_text"
@@ -68,7 +68,7 @@
             android:textSize="12sp"
             android:typeface="monospace"
             tools:text="text"
-            android:maxLines="1" />
+            android:singleLine="true" />
 
     </LinearLayout>
 

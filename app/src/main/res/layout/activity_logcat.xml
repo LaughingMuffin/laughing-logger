@@ -56,7 +56,7 @@
     <com.google.android.material.bottomappbar.BottomAppBar
         android:id="@+id/bottom_appbar"
         android:layout_width="match_parent"
-        android:layout_height="?actionBarSize"
+        android:layout_height="wrap_content"
         android:layout_gravity="bottom"
         app:fabCradleRoundedCornerRadius="4dp"
         app:popupTheme="?popupMenuStyle"
@@ -70,6 +70,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|center_horizontal"
+        android:contentDescription="@string/record_log"
         android:src="@drawable/ic_stop_white_24dp"
         android:tint="@android:color/white"
         app:backgroundTint="#F44336"

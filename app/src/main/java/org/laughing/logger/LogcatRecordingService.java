@@ -16,6 +16,8 @@ import android.os.Looper;
 import android.widget.Toast;
 
 import androidx.core.app.NotificationCompat;
+import androidx.core.app.ServiceCompat;
+import androidx.core.content.ContextCompat;
 
 import org.laughing.logger.R;
 
@@ -79,12 +81,8 @@ public class LogcatRecordingService extends IntentService {
         IntentFilter intentFilter = new IntentFilter(ACTION_STOP_RECORDING);
         intentFilter.addDataScheme(URI_SCHEME);
 
-        try {
-            // we keep this regardless, we try and fail for sure but you never know
-            registerReceiver(receiver, intentFilter);
-        } catch (SecurityException securityException) {
-            registerReceiver(receiver, intentFilter, RECEIVER_EXPORTED);
-        }
+        ContextCompat.registerReceiver(this, receiver, intentFilter,
+                ContextCompat.RECEIVER_NOT_EXPORTED);
 
         handler = new Handler(Looper.getMainLooper());
     }
@@ -119,7 +117,7 @@ public class LogcatRecordingService extends IntentService {
 
         unregisterReceiver(receiver);
 
-        stopForeground(true);
+        ServiceCompat.stopForeground(this, ServiceCompat.STOP_FOREGROUND_REMOVE);
 
         WidgetHelper.updateWidgets(getApplicationContext(), false);
     }
