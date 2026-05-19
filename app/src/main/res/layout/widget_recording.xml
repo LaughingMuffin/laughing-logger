@@ -7,6 +7,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <!-- RemoteViews can't use AppCompat tint; android:tint is the correct
+         attribute here. -->
     <ImageView
         android:layout_width="64dp"
         android:layout_height="64dp"
@@ -14,7 +16,8 @@
         android:contentDescription="@string/app_name"
         android:src="@mipmap/ic_launcher"
         android:tint="#8f312f"
-        android:tintMode="multiply"/>
+        android:tintMode="multiply"
+        tools:ignore="UseAppTint" />
 
     <LinearLayout
         android:layout_width="64dp"
@@ -30,7 +33,8 @@
             android:tint="#EF5350"
             android:visibility="invisible"
             app:srcCompat="@drawable/ic_record_white_24dp"
-            tools:visibility="visible" />
+            tools:visibility="visible"
+            tools:ignore="UseAppTint" />
 
     </LinearLayout>
 
