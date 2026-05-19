@@ -10,12 +10,12 @@ plugins {
 
 android {
     namespace 'org.laughing.logger'
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId "org.laughing.logger"
         minSdk 21
-        targetSdkVersion 34
+        targetSdkVersion 35
         versionName '3.0.3'
         versionCode 303
 
