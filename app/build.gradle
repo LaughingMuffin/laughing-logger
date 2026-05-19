@@ -100,5 +100,5 @@ dependencies {
     implementation 'com.mikhaellopez:circularprogressbar:3.1.0'
 }
 
-apply plugin: 'com.google.gms.google-services'
+// google-services is already applied via the plugins {} block above.
 apply plugin: 'com.google.firebase.crashlytics'
