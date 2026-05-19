@@ -29,7 +29,7 @@ public class App extends Application {
 
     public static App get() {
         if (instance == null) {
-            instance = new App();
+            throw new IllegalStateException("App.get() called before Application.onCreate()");
         }
         return instance;
     }
