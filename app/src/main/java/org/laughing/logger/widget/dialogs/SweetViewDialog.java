@@ -1,5 +1,6 @@
 package org.laughing.logger.widget.dialogs;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,6 +27,7 @@ public class SweetViewDialog extends BottomSheetDialog {
         initContentView();
     }
 
+    @SuppressLint("InflateParams") // dialog content; no parent ViewGroup available at this point
     private void initContentView() {
         LayoutInflater inflater = LayoutInflater.from(mContext);
         View view = inflater.inflate(R.layout.dialog_view, null);
