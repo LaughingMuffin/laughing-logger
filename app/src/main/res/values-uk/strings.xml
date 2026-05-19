@@ -42,7 +42,7 @@
         <item quantity="many">%d файлів буде видалено</item>
     </plurals>
 
-    <string name="filter_choice">Пошук по...</string>
+    <string name="filter_choice">Пошук по…</string>
     <string name="filter_choice_pid">PID</string>
     <string name="filter_choice_tag">Тег</string>
     <string name="filter_text_colon">Фільтр тексту:</string>

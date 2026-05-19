@@ -51,18 +51,12 @@ public class StringUtil {
         return ArrayUtil.toArray(result, String.class);
     }
 
-    /*
-        * Replace all occurances of the searchString in the originalString with the replaceString.  Faster than the
-        * String.replace() method.  Does not use regexes.
-        * <p/>
-        * If your searchString is empty, this will spin forever.
-        *
-        *
-        * @param originalString
-        * @param searchString
-        * @param replaceString
-        * @return
-        */
+    /**
+     * Replace all occurances of the searchString in the originalString with the replaceString.  Faster than the
+     * String.replace() method.  Does not use regexes.
+     * <p>
+     * If your searchString is empty, this will spin forever.
+     */
     public static String replace(String originalString, String searchString, String replaceString) {
         StringBuilder sb = new StringBuilder(originalString);
         int index = sb.indexOf(searchString);
