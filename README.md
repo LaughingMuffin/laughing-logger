@@ -19,7 +19,7 @@ It shows a scrolling (tailed) view of the Android "logcat" system log,
 hence the goofy name. <br> It also allows you to record logs in real time, send logs via email,
 and filter using a variety of criteria.
 
-[![How to install - Laughing Logger](https://i.imgur.com/SsfjCFr.png)](https://youtu.be/6KkvyYbETv0)
+[How to install - Laughing Logger (YouTube)](https://youtu.be/hGXdUrITUVE)
 
 FAQs
 -------------
@@ -52,16 +52,23 @@ If that still doesn't work, you can contact the creator of your ROM to file a bu
 Development
 -------------
 
-- Declare `AD_APP_ID` in your local.properties
-  - This is your APP ID
-- Declare `AD_ON_CLICK_ID` in your local.properties
-  - This is your Interstitial AD ID
-- Select `fdroid` build variants to build and run immediately
-- For `play` variants:
-    - Put `google-services.json` from Firebase in app/src/play/
-    - Put signing keys in local.properties
+**Requirements:** JDK 17 and Android SDK with API 37 installed. The Gradle wrapper (8.13) pins the daemon to JDK 17 via `gradle/gradle-daemon-jvm.properties`; the foojay resolver will fetch a matching JDK automatically if you don't have one.
+
+**`fdroid` flavor** — no Firebase, no AdMob, no signing keys. Just build:
+```
+./gradlew assembleFdroidDebug
+```
+
+**`play` flavor** — requires the following local-only setup:
+- Put `google-services.json` from Firebase in `app/src/play/`
+- Add your AdMob IDs to `local.properties`:
+    - `AD_APP_ID` — your AdMob App ID
+    - `AD_ON_CLICK_ID` — your Interstitial Ad ID
+- For release builds, also add the signing keys (`RELEASE_STORE_FILE`, `RELEASE_STORE_PASSWORD`, `RELEASE_KEY_ALIAS_LL`, `RELEASE_KEY_PASSWORD_LL`) to `local.properties`
 
 For more info on how to setup AdMob consult their guidelines.
+
+See [`CLAUDE.md`](./CLAUDE.md) for architecture notes, the flavor-isolation pattern used to keep Google services out of the fdroid build, and other context useful when working in this repo.
 
 License
 ---------
@@ -87,5 +94,3 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 [1]: https://play.google.com/store/apps/details?id=com.nolanlawson.logcat
 
 [2]: https://github.com/nolanlawson/Catlog
-
-[3]: https://plus.google.com/u/0/communities/108705871773878445106
